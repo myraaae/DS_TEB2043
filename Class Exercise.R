@@ -59,12 +59,23 @@ sum(a)
 a<-c(seq(1,10,3), rep(NA,4), seq(10,2,-2))
 a
 
-#Import csv
+# Import data csv
 getwd()
 data_cv <- read.csv("C:/Users/ACER/Desktop/my_covid(in).csv")
 print(head(data_cv,5))
 summary(data_cv)
 
+a<-c(1:5, rep(NA,3),6:10)
+a
+sum(a)
+b<-a[!is.na(a)]
+b
+sum(b)
+a[is.na(a)]<-0
+a
+#display mean value
+mean_value <- mean(dfMerge$states, na.rm = TRUE)
+dfMerge$states[is.na(dfMerge$states)] <- mean_value
 
 df<- read.csv("C:/Users/airah/Downloads/NAexample.csv")
 View(df)
@@ -92,16 +103,30 @@ df_cleaned <- df_cleaned[-rows_to_remove, ]
 View(df_cleaned)
 View (df_logrm)
 
+#data normalization
+data(iris)
+head(iris)
+str(iris)
+iris$Sepal.Length_norm <- (iris$Sepal.Length - min(iris$Sepal.Length)) / (max(iris$Sepal.Length) - min(iris$Sepal.Length))
+head(iris)
+
+#data standardization
+iris$Sepal.Length
+mean_value <- mean(iris$Sepal.Length)
+mean_value
+sd_value <- sd(iris$Sepal.Length)
+sd_value
+z_manual <- (iris$Sepal.Length - mean_value) / sd_value
+z_manual
+iris$Sepal.Length_z_manual <- (iris$Sepal.Length - mean_value) / sd_value
+head(iris)
+iris$Sepal.Length_z <- scale(iris$Sepal.Length)
+head(iris)
+
 #transforming data
 data(iris)
 head(iris)
-
-#check its type
-class(iris$Species)
-
-#View values of catagories/level
-levels(iris$Species)
-
-#Convert Categorical to numeric
-iris$Species_numeric <- as.numeric(iris$Species)
+class(iris$Species) #check its type
+levels(iris$Species) #View values of categories/level
+iris$Species_numeric <- as.numeric(iris$Species) #Convert Categorical to numeric
 head(iris)
